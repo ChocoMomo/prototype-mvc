@@ -5,8 +5,13 @@
 var injectParams = ['$scope'];
 var HomeController = (function () {
     function HomeController($scope) {
-        $scope.nameText = 'sdflsfsdl';
+        this.$scope = $scope;
+
+        this.$scope.nameText = 'Tommy init';
     }
+    HomeController.prototype.handleClick = function () {
+        alert(this.$scope.nameText + ' button clicked awesome');
+    };
     return HomeController;
 })();
 
