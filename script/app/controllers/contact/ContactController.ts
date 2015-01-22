@@ -8,11 +8,10 @@ class ContactController {
 
 	constructor($scope:any) {
 
-		$scope.nameText = 'sdflsfsdl';
+		$scope.nameText = 'test';
 
 	}
 }
 
-var app = angular.module("sampleApp", []);
 ContactController.$inject = injectParams;
-app.controller("ContactController", ContactController);
+sampleApp.controllers.controller("ContactController", ContactController);

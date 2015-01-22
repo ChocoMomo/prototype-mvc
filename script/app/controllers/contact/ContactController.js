@@ -5,11 +5,10 @@
 var injectParams = ['$scope'];
 var ContactController = (function () {
     function ContactController($scope) {
-        $scope.nameText = 'sdflsfsdl';
+        $scope.nameText = 'test';
     }
     return ContactController;
 })();
 
-var app = angular.module("sampleApp", []);
 ContactController.$inject = injectParams;
-app.controller("ContactController", ContactController);
+sampleApp.controllers.controller("ContactController", ContactController);

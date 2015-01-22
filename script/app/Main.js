@@ -8,24 +8,24 @@ require.config({
         jquery: 'lib/jquery/jquery-1.11.2.min',
         angular: 'lib/angular/angular.min',
         angularRoute: 'lib/angular/angular-route.min',
-        app: 'app/App',
-        route: 'app/route',
+        core: 'app/app',
+        modules: 'app/modules',
         routeResolver: 'app/services/RouteResolver'
     },
     shim: {
         'angular': { deps: ['jquery'], 'exports': 'angular' },
         'angularRoute': { deps: ['angular'], 'exports': 'angularRoute' },
-        'app': { deps: ['angular', 'angularRoute'], 'exports': 'app' },
-        'route': { deps: ['angular', 'angularRoute'], 'exports': 'route' },
-        'routeResolver': { deps: ['angular', 'angularRoute', 'app'], 'exports': 'routeResolver' }
+        'core': { deps: ['angular', 'angularRoute'] },
+        'modules': { deps: ['angular', 'angularRoute', 'core'] },
+        'routeResolver': { deps: ['angular', 'angularRoute', 'core'] }
     }
 });
 
 require([
     'jquery',
     'angular',
-    'app',
-    'route',
+    'core',
+    'modules',
     'routeResolver'
 ], function ($, angular, app) {
     'use strict';

@@ -18,6 +18,7 @@ class HomeController {
     }
 }
 
-var app = angular.module("sampleApp", []);
+//var app = angular.module("sampleApp", []);
 HomeController.$inject = injectParams;
-app.controller("HomeController", HomeController);
+sampleApp.controllers.controller("HomeController", HomeController);
+//app.controller("HomeController", HomeController);
