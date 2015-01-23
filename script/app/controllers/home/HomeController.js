@@ -18,4 +18,3 @@ var HomeController = (function () {
 //var app = angular.module("sampleApp", []);
 HomeController.$inject = injectParams;
 sampleApp.controllers.controller("HomeController", HomeController);
-//app.controller("HomeController", HomeController);

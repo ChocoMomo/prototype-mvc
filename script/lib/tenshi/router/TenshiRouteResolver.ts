@@ -1,25 +1,25 @@
-﻿///<reference path="../../lib/typedef/typeDef.ts" />
+﻿///<reference path="../../typedef/typeDef.ts" />
 
-export var RouteResolver = function() {
+export class RouteResolver {
 
-	this.$get = function () {
+	$get() {
 		return this;
-	};
+	}
 
-	this.routeConfig = function() {
+	routeConfig = function() {
 		var viewsDirectory = 'script/app/views/',
 			controllersDirectory = 'script/app/controllers/',
 
-			setBaseDirectories = function (viewsDir, controllersDir) {
+			setBaseDirectories =  (viewsDir, controllersDir) => {
 				viewsDirectory = viewsDir;
 				controllersDirectory = controllersDir;
 			},
 
-			getViewsDirectory = function () {
+			getViewsDirectory = () => {
 				return viewsDirectory;
 			},
 
-			getControllersDirectory = function () {
+			getControllersDirectory = () => {
 				return controllersDirectory;
 			};
 
@@ -30,7 +30,7 @@ export var RouteResolver = function() {
 		};
 	}();
 
-	this.route = function(routeConfig) {
+	route = function(routeConfig) {
 
 		var resolve = (baseName, viewId, controllerAs, secure) => {
 
@@ -66,8 +66,7 @@ export var RouteResolver = function() {
 			resolve: resolve
 		}
 	}(this.routeConfig);
-
-};
+}
 
 var servicesApp:any = angular.module('RouteResolverServices', []);
 
