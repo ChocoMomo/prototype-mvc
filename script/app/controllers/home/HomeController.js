@@ -14,7 +14,6 @@ var HomeController = (function () {
     };
     return HomeController;
 })();
-
 //var app = angular.module("sampleApp", []);
-HomeController.$inject = injectParams;
-sampleApp.controllers.controller("HomeController", HomeController);
+//HomeController.$inject = injectParams;
+//sampleApp.controllers.controller("HomeController", HomeController);

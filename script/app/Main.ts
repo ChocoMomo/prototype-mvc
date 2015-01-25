@@ -23,21 +23,32 @@
 	//		'RouteResolver' : {deps:['angular', 'angularRoute', 'core'] }
 	//	}
 	//});
+var sitemap = 'app/config/TenshiSitemap';
 
 require([
+    sitemap,
 	"lib/externals"
 ],
-	function ()
+	function (sitemap)
 	{
-		//		new Main(siteconfig);
+        new Main(sitemap);
 	});
-
 
 import Tenshi = require('lib/tenshi/core/Tenshi');
 
 class Main {
+    public _tenshi:Tenshi;
 
+    constructor(sitemap) {
+        this._tenshi = new Tenshi();
+        this._tenshi.init();
+    }
+
+    init() {
+
+    }
 }
+
 
 
 //require( [

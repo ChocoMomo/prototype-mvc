@@ -4,6 +4,18 @@
  * Tenshi Furēmuwāku
  */
 
-export class Tenshi {
+/// <reference path="../../typedef/typeDef.ts" />
 
+import TenshiModules = require('lib/tenshi/modules/TenshiModules');
+
+class Tenshi {
+    constructor() {
+
+    }
+
+    init() {
+
+    }
 }
+
+export = Tenshi;

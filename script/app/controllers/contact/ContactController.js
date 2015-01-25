@@ -9,6 +9,5 @@ var ContactController = (function () {
     }
     return ContactController;
 })();
-
-ContactController.$inject = injectParams;
-sampleApp.controllers.controller("ContactController", ContactController);
+//ContactController.$inject = injectParams;
+//sampleApp.controllers.controller("ContactController", ContactController);
