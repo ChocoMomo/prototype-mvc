@@ -11,7 +11,6 @@ var require = {
 		jquery: 'lib/jquery/jquery-1.11.2.min',
 		angular: 'lib/angular/angular.min',
 		angularRoute: 'lib/angular/angular-route.min'
-
 	},
 	shim: {
 		'angular' : {deps:['jquery'], 'exports' : 'angular' },

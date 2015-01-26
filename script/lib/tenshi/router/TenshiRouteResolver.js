@@ -1,7 +1,7 @@
 ﻿///<reference path="../../typedef/typeDef.ts" />
 define(["require", "exports"], function(require, exports) {
-    var RouteResolver = (function () {
-        function RouteResolver() {
+    var TenshiRouteResolver = (function () {
+        function TenshiRouteResolver() {
             this.routeConfig = function () {
                 var viewsDirectory = 'script/app/views/', controllersDirectory = 'script/app/controllers/', setBaseDirectories = function (viewsDir, controllersDir) {
                     viewsDirectory = viewsDir;
@@ -53,15 +53,10 @@ define(["require", "exports"], function(require, exports) {
                 };
             }(this.routeConfig);
         }
-        RouteResolver.prototype.$get = function () {
+        TenshiRouteResolver.prototype.$get = function () {
             return this;
         };
-        return RouteResolver;
+        return TenshiRouteResolver;
     })();
-    exports.RouteResolver = RouteResolver;
-
-    var servicesApp = angular.module('RouteResolverServices', []);
-
-    //Must be a provider since it will be injected into module.config()
-    servicesApp.provider('RouteResolver', RouteResolver);
+    exports.TenshiRouteResolver = TenshiRouteResolver;
 });

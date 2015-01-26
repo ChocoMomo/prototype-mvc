@@ -1,6 +1,6 @@
 ﻿///<reference path="../../typedef/typeDef.ts" />
 
-export class RouteResolver {
+export class TenshiRouteResolver {
 
 	$get() {
 		return this;
@@ -67,8 +67,3 @@ export class RouteResolver {
 		}
 	}(this.routeConfig);
 }
-
-var servicesApp:any = angular.module('RouteResolverServices', []);
-
-//Must be a provider since it will be injected into module.config()
-servicesApp.provider('RouteResolver', RouteResolver);

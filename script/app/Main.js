@@ -1,28 +1,8 @@
-/**
-* Created by tommy on 23-1-15.
-*/
-/// <reference path="../lib/typedef/typeDef.ts" />
 define(["require", "exports", 'lib/tenshi/core/Tenshi'], function(require, exports, Tenshi) {
-    //require.config({
-    //	baseUrl: 'script',
-    //	paths: {
-    //		jquery: 'lib/jquery/jquery-1.11.2.min',
-    //		angular: 'lib/angular/angular.min',
-    //		angularRoute: 'lib/angular/angular-route.min',
-    //
-    //		core: 'app/app',
-    //		modules: 'app/modules',
-    //		RouteResolver: 'app/services/RouteResolver'
-    //	},
-    //	shim: {
-    //		'angular' : {deps:['jquery'], 'exports' : 'angular' },
-    //		'angularRoute' : {deps:['angular'], 'exports' : 'angularRoute' },
-    //
-    //		'core' : {deps:['angular', 'angularRoute'] },
-    //		'modules' : {deps:['angular', 'angularRoute', 'core'] },
-    //		'RouteResolver' : {deps:['angular', 'angularRoute', 'core'] }
-    //	}
-    //});
+    /**
+    * Created by tommy on 23-1-15.
+    */
+    /// <reference path="../lib/typedef/typeDef.ts" />
     var sitemap = 'app/config/TenshiSitemap';
 
     require([
@@ -32,28 +12,78 @@ define(["require", "exports", 'lib/tenshi/core/Tenshi'], function(require, expor
         new Main(sitemap);
     });
 
+    var TenshiRouteResolver = (function () {
+        function TenshiRouteResolver() {
+            this.routeConfig = function () {
+                var viewsDirectory = 'script/app/views/', controllersDirectory = 'script/app/controllers/', setBaseDirectories = function (viewsDir, controllersDir) {
+                    viewsDirectory = viewsDir;
+                    controllersDirectory = controllersDir;
+                }, getViewsDirectory = function () {
+                    return viewsDirectory;
+                }, getControllersDirectory = function () {
+                    return controllersDirectory;
+                };
+
+                return {
+                    setBaseDirectories: setBaseDirectories,
+                    getControllersDirectory: getControllersDirectory,
+                    getViewsDirectory: getViewsDirectory
+                };
+            }();
+            this.route = function (routeConfig) {
+                var resolve = function (baseName, viewId, controllerAs, secure) {
+                    var routeDef = {};
+                    var baseFileName = baseName.charAt(0).toLowerCase() + baseName.substr(1);
+
+                    routeDef.templateUrl = routeConfig.getViewsDirectory() + viewId + '/' + baseFileName + '.html';
+                    routeDef.controller = baseName + 'Controller';
+
+                    if (controllerAs)
+                        routeDef.controllerAs = controllerAs;
+                    routeDef.secure = (secure) ? secure : false;
+                    routeDef.resolve = {
+                        load: [
+                            '$q', '$rootScope', function ($q, $rootScope) {
+                                var dependencies = [routeConfig.getControllersDirectory() + viewId + '/' + baseName + 'Controller.js'];
+                                return resolveDependencies($q, $rootScope, dependencies);
+                            }]
+                    };
+
+                    return routeDef;
+                }, resolveDependencies = function ($q, $rootScope, dependencies) {
+                    var defer = $q.defer();
+                    require(dependencies, function () {
+                        defer.resolve();
+                        $rootScope.$apply();
+                    });
+
+                    return defer.promise;
+                };
+
+                return {
+                    resolve: resolve
+                };
+            }(this.routeConfig);
+        }
+        TenshiRouteResolver.prototype.$get = function () {
+            return this;
+        };
+        return TenshiRouteResolver;
+    })();
+
+    var servicesApp = angular.module('TenshiRouteResolverServices', []);
+
+    //Must be a provider since it will be injected into module.config()
+    servicesApp.provider('TenshiRouteResolver', TenshiRouteResolver());
+
     var Main = (function () {
         function Main(sitemap) {
-            this._tenshi = new Tenshi();
-            this._tenshi.init();
+            var _this = this;
+            $(function () {
+                _this._tenshi = new Tenshi();
+                _this._tenshi.bootstrap();
+            });
         }
-        Main.prototype.init = function () {
-        };
         return Main;
     })();
 });
-//require( [
-//	'jquery',
-//	'angular',
-//
-//	'core',
-//	'modules',
-//	'RouteResolver'
-//], function($, angular, app) {
-//	'use strict';
-//	$(function () {
-//		var $html = $('html');
-//		angular.bootstrap($html, [app.app['name']]);
-//		$html.addClass('ng-app');
-//	});
-//});
