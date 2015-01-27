@@ -1,6 +1,6 @@
 ﻿///<reference path="../../typedef/typeDef.ts" />
 
-export class TenshiRouteResolver {
+export class TenshiRouteResolver implements ng.IServiceProvider {
 
 	$get() {
 		return this;

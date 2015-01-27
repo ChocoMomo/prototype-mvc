@@ -1,31 +1,7 @@
-define(["require", "exports", 'lib/tenshi/core/Tenshi'], function(require, exports, Tenshi) {
-    /**
-    * Created by tommy on 23-1-15.
-    */
-    /// <reference path="../lib/typedef/typeDef.ts" />
-    var sitemap = 'app/config/TenshiSitemap';
-
-    require([
-        sitemap,
-        "lib/externals"
-    ], function (sitemap) {
-        new Main(sitemap);
-    });
-
-    //import TenshiRouteResolver = require('lib/tenshi/core/Tenshi');
-    var Main = (function () {
-        function Main(sitemap) {
-            var _this = this;
-            $(function () {
-                _this._tenshi = new Tenshi();
-                _this._tenshi.bootstrap();
-            });
-        }
-        return Main;
-    })();
-
-    var TenshiRouteResolver = (function () {
-        function TenshiRouteResolver() {
+﻿///<reference path="../../../typedef/typeDef.ts" />
+define(["require", "exports"], function(require, exports) {
+    var TenshiRouterService = (function () {
+        function TenshiRouterService() {
             this.routeConfig = function () {
                 var viewsDirectory = 'script/app/views/', controllersDirectory = 'script/app/controllers/', setBaseDirectories = function (viewsDir, controllersDir) {
                     viewsDirectory = viewsDir;
@@ -77,13 +53,10 @@ define(["require", "exports", 'lib/tenshi/core/Tenshi'], function(require, expor
                 };
             }(this.routeConfig);
         }
-        TenshiRouteResolver.prototype.$get = function () {
+        TenshiRouterService.prototype.$get = function () {
             return this;
         };
-        return TenshiRouteResolver;
+        return TenshiRouterService;
     })();
-    exports.TenshiRouteResolver = TenshiRouteResolver;
+    exports.TenshiRouterService = TenshiRouterService;
 });
-//var servicesApp:any = angular.module('TenshiRouteResolverServices', []);
-////Must be a provider since it will be injected into module.config()
-//servicesApp.provider('TenshiRouteResolver', TenshiRouteResolver);

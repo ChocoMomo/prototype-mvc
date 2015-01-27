@@ -3,7 +3,7 @@
 *
 * Tenshi Furēmuwāku
 */
-define(["require", "exports", 'angular', 'lib/tenshi/modules/TenshiModules'], function(require, exports, angular, TenshiModules) {
+define(["require", "exports", 'angular', 'lib/tenshi/modules/TenshiModules', 'lib/tenshi/router/TenshiRouteResolver'], function(require, exports, angular, TenshiModules, TenshiRouteResolver) {
     var Tenshi = (function () {
         function Tenshi() {
         }
@@ -16,6 +16,10 @@ define(["require", "exports", 'angular', 'lib/tenshi/modules/TenshiModules'], fu
 
         Tenshi.prototype.config = function () {
             console.log("Angular Config Routing");
+
+            //		var servicesApp:any = angular.module('TenshiRouteResolverServices', []);
+            ////Must be a provider since it will be injected into module.config()
+            TenshiModules.app.provider('TenshiRouteResolver', TenshiRouteResolver);
 
             TenshiModules.app.config([
                 '$routeProvider', 'TenshiRouteResolverProvider',

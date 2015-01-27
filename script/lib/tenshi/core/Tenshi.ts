@@ -21,6 +21,10 @@ class Tenshi {
 	config() {
 		console.log("Angular Config Routing");
 
+//		var servicesApp:any = angular.module('TenshiRouteResolverServices', []);
+		////Must be a provider since it will be injected into module.config()
+		TenshiModules.app.provider('TenshiRouteResolver', TenshiRouteResolver);
+
 		TenshiModules.app.config(['$routeProvider', 'TenshiRouteResolverProvider',
 		($routeProvider, TenshiRouteResolverProvider) => {
 
