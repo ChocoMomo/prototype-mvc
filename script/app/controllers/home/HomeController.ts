@@ -17,7 +17,7 @@ class HomeController {
 		this.$location = $location;
 		this.$scope.nameText = 'ik-ben-tommy dit is mijn angualr mvc';
 
-		console.log(StringUtils.camelCase('t-s-g-t-t-'));
+		console.log(StringUtils.camelCase('home-controller'));
 	}
 
     handleClick1() {

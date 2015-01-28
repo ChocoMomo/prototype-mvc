@@ -1,11 +1,16 @@
 ﻿///<reference path="../../../typedef/typeDef.ts" />
 
-import StringUtils = require('lib/tenshi/recipes/service/StringUtils');
+import StringUtils = require('lib/tenshi/recipes/factory/StringUtils');
 
 class TenshiRouteResolver implements ng.IServiceProvider {
 	$get() {
 		return this;
 	}
+
+    //constructor(StringUtils) {
+    constructor() {
+
+    }
 
 	routeConfig = function() {
 		var viewsDirectory = 'script/app/views/',
@@ -33,6 +38,7 @@ class TenshiRouteResolver implements ng.IServiceProvider {
 
 	route = function(routeConfig) {
 		var resolve = (baseName, viewId, controllerAs, secure) => {
+
 				var routeDef:any = {};
 				var baseFileName = baseName.charAt(0).toLowerCase() + baseName.substr(1);
 				routeDef.templateUrl = routeConfig.getViewsDirectory() + viewId + '/' + baseFileName + '.html';

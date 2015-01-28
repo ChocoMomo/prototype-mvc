@@ -1,6 +1,7 @@
 ﻿///<reference path="../../../typedef/typeDef.ts" />
 define(["require", "exports"], function(require, exports) {
     var TenshiRouteResolver = (function () {
+        //constructor(StringUtils) {
         function TenshiRouteResolver() {
             this.routeConfig = function () {
                 var viewsDirectory = 'script/app/views/', controllersDirectory = 'script/app/controllers/', setBaseDirectories = function (viewsDir, controllersDir) {

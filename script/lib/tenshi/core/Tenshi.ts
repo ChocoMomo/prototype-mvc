@@ -38,7 +38,7 @@ class Tenshi {
 	 * @access private
 	 */
 	private config() {
-		this.registerProviders();
+        this.registerProviders();
 		TenshiModules.app.config(
 			// Prefix providers with Provider to access the class e.g: TenshiRouteResolver to TenshiRouteResolverProvider
 			['$routeProvider', 'TenshiRouteResolverProvider', '$controllerProvider',
@@ -75,7 +75,7 @@ class Tenshi {
 	 */
 	private registerProviders() {
 		////Must be a provider since it will be injected into module.config()
-		TenshiModules.providers.provider('TenshiRouteResolver', TenshiRouteResolver);
+        TenshiModules.providers.provider('TenshiRouteResolver', TenshiRouteResolver);
 	}
 
 	/**
