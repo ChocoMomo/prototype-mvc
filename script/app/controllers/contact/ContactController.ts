@@ -2,6 +2,7 @@
  * Created by tommy on 20-1-15.
  */
 /// <reference path="../../../lib/typedef/typeDef.ts" />
+import TenshiModules = require('lib/tenshi/modules/TenshiModules');
 
 var injectParams = ['$scope'];
 class ContactController {
@@ -13,5 +14,5 @@ class ContactController {
 	}
 }
 
-//ContactController.$inject = injectParams;
-//sampleApp.controllers.controller("ContactController", ContactController);
+ContactController.$inject = injectParams;
+TenshiModules.app.register.controller("ContactController", ContactController);

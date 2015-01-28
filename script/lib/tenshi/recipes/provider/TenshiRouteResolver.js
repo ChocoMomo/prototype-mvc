@@ -1,4 +1,4 @@
-﻿///<reference path="../../typedef/typeDef.ts" />
+﻿///<reference path="../../../typedef/typeDef.ts" />
 define(["require", "exports"], function(require, exports) {
     var TenshiRouteResolver = (function () {
         function TenshiRouteResolver() {
@@ -22,7 +22,6 @@ define(["require", "exports"], function(require, exports) {
                 var resolve = function (baseName, viewId, controllerAs, secure) {
                     var routeDef = {};
                     var baseFileName = baseName.charAt(0).toLowerCase() + baseName.substr(1);
-
                     routeDef.templateUrl = routeConfig.getViewsDirectory() + viewId + '/' + baseFileName + '.html';
                     routeDef.controller = baseName + 'Controller';
 
@@ -58,5 +57,7 @@ define(["require", "exports"], function(require, exports) {
         };
         return TenshiRouteResolver;
     })();
-    exports.TenshiRouteResolver = TenshiRouteResolver;
+
+    
+    return TenshiRouteResolver;
 });

@@ -3,10 +3,10 @@
 */
 /// <reference path="../../lib/typedef/typeDef.ts" />
 define({
-    "title": "Tenchi Furēmuwāku",
+    "title": "天使のフレームワーク : Tenshi no Furēmuwāku",
     "config": {
-        "controllerPath": "app/controllers/",
-        "viewsPath": "app/views/"
+        "controllerPath": "script/app/controllers/",
+        "viewsPath": "script/app/views/"
     },
     "views": [
         {

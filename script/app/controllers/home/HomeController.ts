@@ -3,24 +3,32 @@
  */
 /// <reference path="../../../lib/typedef/typeDef.ts" />
 
-var injectParams = ['$scope', '$location'];
+import TenshiModules = require('lib/tenshi/modules/TenshiModules');
+import StringUtils = require('lib/tenshi/recipes/factory/StringUtils');
+
+var injectParams = ['$scope', '$location', 'StringUtils'];
 class HomeController {
     $scope:any;
     $location:any;
+    StringUtils:any;
 
-	constructor($scope:any, $location:any) {
+	constructor($scope:any, $location:any, StringUtils:StringUtils) {
 		this.$scope = $scope;
 		this.$location = $location;
+		this.$scope.nameText = 'ik-ben-tommy dit is mijn angualr mvc';
 
-        this.$scope.nameText = 'Tommy init';
+		console.log(StringUtils.camelCase('t-s-g-t-t-'));
 	}
 
-    handleClick() {
+    handleClick1() {
 	    alert(this.$location.path().substring(1));
         alert(this.$scope.nameText + ' button clicked awesome');
     }
+
+	handleClick2() {
+//		alert(StringUtils.camelCase(this.$scope.nameText));
+	}
 }
 
-//var app = angular.module("sampleApp", []);
-//HomeController.$inject = injectParams;
-//sampleApp.controllers.controller("HomeController", HomeController);
+HomeController.$inject = injectParams;
+TenshiModules.app.register.controller("HomeController", HomeController);

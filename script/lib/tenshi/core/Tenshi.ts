@@ -6,41 +6,88 @@
 
 /// <reference path="../../typedef/typeDef.ts" />
 
-import angular = require('angular');
+import ng = require('angular');
 import TenshiModules = require('lib/tenshi/modules/TenshiModules');
-import TenshiRouteResolver  = require('lib/tenshi/router/TenshiRouteResolver');
+
+//Services
+import TenshiRouteResolver  = require('lib/tenshi/recipes/provider/TenshiRouteResolver');
+import StringUtils          = require('lib/tenshi/recipes/factory/StringUtils');
 
 class Tenshi {
-	bootstrap() {
+	private _sitemap:any;
+
+	constructor(sitemap) {
+		this._sitemap = sitemap;
+	}
+
+	/**
+	 * Bootstrap the application
+	 *
+	 * @access private
+	 */
+	public bootstrap() {
 		this.config();
 		var $html = $('html');
 		angular.bootstrap($html, [TenshiModules.app['name']]);
 		$html.addClass('ng-app');
 	}
 
-	config() {
-		console.log("Angular Config Routing");
+	/**
+	 * Set up the core configuration
+	 *
+	 * @access private
+	 */
+	private config() {
+		this.registerProviders();
+		TenshiModules.app.config(
+			// Prefix providers with Provider to access the class e.g: TenshiRouteResolver to TenshiRouteResolverProvider
+			['$routeProvider', 'TenshiRouteResolverProvider', '$controllerProvider',
+			'$compileProvider', '$filterProvider', '$provide',
+		($routeProvider, TenshiRouteResolverProvider, $controllerProvider,
+		 $compileProvider, $filterProvider, $provide) => {
+			// Register the Recipes
+			TenshiModules.app.register = {
+				controller: $controllerProvider.register,
+				directive: $compileProvider.directive,
+				filter: $filterProvider.register,
+				factory: $provide.factory,
+				service: $provide.service
+			};
 
-//		var servicesApp:any = angular.module('TenshiRouteResolverServices', []);
-		////Must be a provider since it will be injected into module.config()
-		TenshiModules.app.provider('TenshiRouteResolver', TenshiRouteResolver);
+			var route:any = TenshiRouteResolverProvider.route;
 
-		TenshiModules.app.config(['$routeProvider', 'TenshiRouteResolverProvider',
-		($routeProvider, TenshiRouteResolverProvider) => {
+			ng.forEach(this._sitemap.views, function(r) {
+//				$routeProvider.when('/' + r.id, route.resolve(r.id, r.id, 'vm'));
+			});
 
-			var route = TenshiRouteResolverProvider.route;
+			$routeProvider.when('/home', route.resolve('Home', 'home', 'vm'));
+//			$routeProvider.when('/contact', route.resolve('Contact', 'contact', 'vm'));
+			$routeProvider.otherwise({redirectTo: '/home'});
 
-			$routeProvider.
-				when('/home', route.resolve('Home', 'home', 'vm')).
-				when('/contact', route.resolve('Contact', 'contact', 'vm')).
-				otherwise({redirectTo: '/home'});
+			this.registerServices();
 		}]);
+	}
+
+	/**
+	 * Register providers
+	 *
+	 * @access private
+	 */
+	private registerProviders() {
+		////Must be a provider since it will be injected into module.config()
+		TenshiModules.providers.provider('TenshiRouteResolver', TenshiRouteResolver);
+	}
+
+	/**
+	 * Register services
+	 *
+	 * @access private
+	 */
+	private registerServices() {
+		TenshiModules.app.register.factory('StringUtils', ()=> {
+			return new StringUtils()
+		});
 	}
 }
 
 export = Tenshi;
-
-//var servicesApp:any = angular.module('TenshiRouteResolverServices', []);
-//
-////Must be a provider since it will be injected into module.config()
-//servicesApp.provider('TenshiRouteResolver', TenshiRouteResolver);
