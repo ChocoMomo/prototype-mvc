@@ -3,7 +3,8 @@
 *
 * Tenshi Furēmuwāku
 */
-define(["require", "exports", 'angular', 'lib/tenshi/modules/TenshiModules', 'lib/tenshi/recipes/provider/TenshiRouteResolver', 'lib/tenshi/recipes/factory/StringUtils'], function(require, exports, ng, TenshiModules, TenshiRouteResolver, StringUtils) {
+define(["require", "exports", 'angular', 'lib/tenshi/modules/TenshiModules', 'lib/tenshi/recipes/provider/TenshiRouteResolver', 'lib/tenshi/recipes/provider/TenshiLogger'], function(require, exports, ng, TenshiModules, TenshiRouteResolver, TenshiLogger) {
+    //import StringUtils          = require('lib/tenshi/recipes/factory/StringUtils');
     var Tenshi = (function () {
         function Tenshi(sitemap) {
             this._sitemap = sitemap;
@@ -30,8 +31,8 @@ define(["require", "exports", 'angular', 'lib/tenshi/modules/TenshiModules', 'li
             this.registerProviders();
             TenshiModules.app.config([
                 '$routeProvider', 'TenshiRouteResolverProvider', '$controllerProvider',
-                '$compileProvider', '$filterProvider', '$provide',
-                function ($routeProvider, TenshiRouteResolverProvider, $controllerProvider, $compileProvider, $filterProvider, $provide) {
+                '$compileProvider', '$filterProvider', '$provide', 'TenshiLoggerProvider',
+                function ($routeProvider, TenshiRouteResolverProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, TenshiLoggerProvider) {
                     // Register the Recipes
                     TenshiModules.app.register = {
                         controller: $controllerProvider.register,
@@ -52,7 +53,8 @@ define(["require", "exports", 'angular', 'lib/tenshi/modules/TenshiModules', 'li
                     //			$routeProvider.when('/contact', route.resolve('Contact', 'contact', 'vm'));
                     $routeProvider.otherwise({ redirectTo: '/home' });
 
-                    _this.registerServices();
+                    //			this.registerServices();
+                    console.log(TenshiLoggerProvider);
                 }]);
         };
 
@@ -64,6 +66,7 @@ define(["require", "exports", 'angular', 'lib/tenshi/modules/TenshiModules', 'li
         Tenshi.prototype.registerProviders = function () {
             ////Must be a provider since it will be injected into module.config()
             TenshiModules.providers.provider('TenshiRouteResolver', TenshiRouteResolver);
+            TenshiModules.providers.provider('TenshiLogger', TenshiLogger);
         };
 
         /**
@@ -72,9 +75,9 @@ define(["require", "exports", 'angular', 'lib/tenshi/modules/TenshiModules', 'li
         * @access private
         */
         Tenshi.prototype.registerServices = function () {
-            TenshiModules.app.register.factory('StringUtils', function () {
-                return new StringUtils();
-            });
+            //		TenshiModules.app.register.factory('StringUtils', ()=> {
+            //			return new StringUtils()
+            //		});
         };
         return Tenshi;
     })();

@@ -1,7 +1,10 @@
-﻿///<reference path="../../../typedef/typeDef.ts" />
+﻿/**
+* Created by tommy on 14-1-15.
+*/
+///<reference path="../../../typedef/typeDef.ts" />
 define(["require", "exports"], function(require, exports) {
+    //import StringUtils = require('lib/tenshi/recipes/factory/StringUtils');
     var TenshiRouteResolver = (function () {
-        //constructor(StringUtils) {
         function TenshiRouteResolver() {
             this.routeConfig = function () {
                 var viewsDirectory = 'script/app/views/', controllersDirectory = 'script/app/controllers/', setBaseDirectories = function (viewsDir, controllersDir) {

@@ -11,7 +11,8 @@ import TenshiModules = require('lib/tenshi/modules/TenshiModules');
 
 //Services
 import TenshiRouteResolver  = require('lib/tenshi/recipes/provider/TenshiRouteResolver');
-import StringUtils          = require('lib/tenshi/recipes/factory/StringUtils');
+import TenshiLogger         = require('lib/tenshi/recipes/provider/TenshiLogger');
+//import StringUtils          = require('lib/tenshi/recipes/factory/StringUtils');
 
 class Tenshi {
 	private _sitemap:any;
@@ -42,9 +43,9 @@ class Tenshi {
 		TenshiModules.app.config(
 			// Prefix providers with Provider to access the class e.g: TenshiRouteResolver to TenshiRouteResolverProvider
 			['$routeProvider', 'TenshiRouteResolverProvider', '$controllerProvider',
-			'$compileProvider', '$filterProvider', '$provide',
+			'$compileProvider', '$filterProvider', '$provide', 'TenshiLoggerProvider',
 		($routeProvider, TenshiRouteResolverProvider, $controllerProvider,
-		 $compileProvider, $filterProvider, $provide) => {
+		 $compileProvider, $filterProvider, $provide, TenshiLoggerProvider) => {
 			// Register the Recipes
 			TenshiModules.app.register = {
 				controller: $controllerProvider.register,
@@ -64,7 +65,14 @@ class Tenshi {
 //			$routeProvider.when('/contact', route.resolve('Contact', 'contact', 'vm'));
 			$routeProvider.otherwise({redirectTo: '/home'});
 
-			this.registerServices();
+//			this.registerServices();
+
+
+
+
+
+			console.log(TenshiLoggerProvider);
+
 		}]);
 	}
 
@@ -76,6 +84,7 @@ class Tenshi {
 	private registerProviders() {
 		////Must be a provider since it will be injected into module.config()
         TenshiModules.providers.provider('TenshiRouteResolver', TenshiRouteResolver);
+        TenshiModules.providers.provider('TenshiLogger', TenshiLogger);
 	}
 
 	/**
@@ -84,9 +93,9 @@ class Tenshi {
 	 * @access private
 	 */
 	private registerServices() {
-		TenshiModules.app.register.factory('StringUtils', ()=> {
-			return new StringUtils()
-		});
+//		TenshiModules.app.register.factory('StringUtils', ()=> {
+//			return new StringUtils()
+//		});
 	}
 }
 

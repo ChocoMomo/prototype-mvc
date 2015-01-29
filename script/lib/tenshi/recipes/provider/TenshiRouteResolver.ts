@@ -1,16 +1,14 @@
-﻿///<reference path="../../../typedef/typeDef.ts" />
+﻿/**
+ * Created by tommy on 14-1-15.
+ */
+///<reference path="../../../typedef/typeDef.ts" />
 
-import StringUtils = require('lib/tenshi/recipes/factory/StringUtils');
+//import StringUtils = require('lib/tenshi/recipes/factory/StringUtils');
 
 class TenshiRouteResolver implements ng.IServiceProvider {
 	$get() {
 		return this;
 	}
-
-    //constructor(StringUtils) {
-    constructor() {
-
-    }
 
 	routeConfig = function() {
 		var viewsDirectory = 'script/app/views/',

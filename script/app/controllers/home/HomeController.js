@@ -3,14 +3,14 @@
 */
 /// <reference path="../../../lib/typedef/typeDef.ts" />
 define(["require", "exports", 'lib/tenshi/modules/TenshiModules'], function(require, exports, TenshiModules) {
-    var injectParams = ['$scope', '$location', 'StringUtils'];
+    //import StringUtils = require('lib/tenshi/recipes/factory/StringUtils');
+    var injectParams = ['$scope', '$location'];
     var HomeController = (function () {
-        function HomeController($scope, $location, StringUtils) {
+        function HomeController($scope, $location) {
             this.$scope = $scope;
             this.$location = $location;
             this.$scope.nameText = 'ik-ben-tommy dit is mijn angualr mvc';
-
-            console.log(StringUtils.camelCase('home-controller'));
+            //		console.log(StringUtils.camelCase('home-controller'));
         }
         HomeController.prototype.handleClick1 = function () {
             alert(this.$location.path().substring(1));
