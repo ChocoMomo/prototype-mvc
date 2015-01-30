@@ -1,2 +1,6 @@
-body {
-  background: grey; }
+html, body {
+  padding-top: 0;
+  height: 100%;
+  background: gray;
+  max-width: 960px;
+  margin: 0 auto; }

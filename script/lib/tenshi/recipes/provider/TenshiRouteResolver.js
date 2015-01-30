@@ -1,11 +1,12 @@
-﻿/**
-* Created by tommy on 14-1-15.
-*/
-///<reference path="../../../typedef/typeDef.ts" />
-define(["require", "exports"], function(require, exports) {
-    //import StringUtils = require('lib/tenshi/recipes/factory/StringUtils');
+﻿///<reference path="../../../typedef/typeDef.ts" />
+define(["require", "exports", 'lib/tenshi/utils/StringUtils'], function(require, exports, StringUtils) {
     var TenshiRouteResolver = (function () {
         function TenshiRouteResolver() {
+            /**
+            * Route configurations
+            *
+            * @method: routeConfig
+            */
             this.routeConfig = function () {
                 var viewsDirectory = 'script/app/views/', controllersDirectory = 'script/app/controllers/', setBaseDirectories = function (viewsDir, controllersDir) {
                     viewsDirectory = viewsDir;
@@ -22,20 +23,24 @@ define(["require", "exports"], function(require, exports) {
                     getViewsDirectory: getViewsDirectory
                 };
             }();
+            /**
+            * Resolve the routing
+            *
+            * @method: route
+            */
             this.route = function (routeConfig) {
                 var resolve = function (baseName, viewId, controllerAs, secure) {
-                    var routeDef = {};
-                    var baseFileName = baseName.charAt(0).toLowerCase() + baseName.substr(1);
-                    routeDef.templateUrl = routeConfig.getViewsDirectory() + viewId + '/' + baseFileName + '.html';
-                    routeDef.controller = baseName + 'Controller';
+                    var baseFileName = StringUtils.camelCase(baseName), controller = baseFileName + 'Controller', routeDef = {
+                        templateUrl: routeConfig.getViewsDirectory() + viewId + '/' + baseName + '.html',
+                        controller: controller,
+                        controllerAs: ((controllerAs) ? controllerAs : ''),
+                        secure: ((secure) ? secure : false)
+                    };
 
-                    if (controllerAs)
-                        routeDef.controllerAs = controllerAs;
-                    routeDef.secure = (secure) ? secure : false;
                     routeDef.resolve = {
                         load: [
                             '$q', '$rootScope', function ($q, $rootScope) {
-                                var dependencies = [routeConfig.getControllersDirectory() + viewId + '/' + baseName + 'Controller.js'];
+                                var dependencies = [routeConfig.getControllersDirectory() + viewId + '/' + controller + '.js'];
                                 return resolveDependencies($q, $rootScope, dependencies);
                             }]
                     };
@@ -56,6 +61,12 @@ define(["require", "exports"], function(require, exports) {
                 };
             }(this.routeConfig);
         }
+        /**
+        * This is a mandatory Ng method for providers
+        *
+        * @access public static
+        * @method: $get
+        */
         TenshiRouteResolver.prototype.$get = function () {
             return this;
         };

@@ -1,6 +1,3 @@
-/**
- * Created by tommy on 23-1-15.
- */
 /// <reference path="../lib/typedef/typeDef.ts" />
 var sitemap = 'app/config/TenshiSitemap';
 

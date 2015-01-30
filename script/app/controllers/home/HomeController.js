@@ -1,8 +1,5 @@
-/**
-* Created by tommy on 20-1-15.
-*/
 /// <reference path="../../../lib/typedef/typeDef.ts" />
-define(["require", "exports", 'lib/tenshi/modules/TenshiModules'], function(require, exports, TenshiModules) {
+define(["require", "exports", 'lib/tenshi/modules/TenshiModules', 'lib/tenshi/utils/StringUtils'], function(require, exports, TenshiModules, StringUtils) {
     var injectParams = ['$scope', '$location', 'TenshiLogger'];
     var HomeController = (function () {
         function HomeController($scope, $location, TenshiLogger) {
@@ -11,7 +8,6 @@ define(["require", "exports", 'lib/tenshi/modules/TenshiModules'], function(requ
 
             this.$scope.nameText = 'ik-ben-tommy dit is mijn angualr mvc';
 
-            //		console.log(StringUtils.camelCase('home-controller'));
             var logger = TenshiLogger.getInstance();
             logger.log('This is a log');
             logger.warn('warn', 'This is a warn');
@@ -25,7 +21,7 @@ define(["require", "exports", 'lib/tenshi/modules/TenshiModules'], function(requ
         };
 
         HomeController.prototype.handleClick2 = function () {
-            //		alert(StringUtils.camelCase(this.$scope.nameText));
+            alert(StringUtils.camelCase(this.$scope.nameText));
         };
         return HomeController;
     })();

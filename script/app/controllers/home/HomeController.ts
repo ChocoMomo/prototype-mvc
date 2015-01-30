@@ -1,10 +1,7 @@
-/**
- * Created by tommy on 20-1-15.
- */
 /// <reference path="../../../lib/typedef/typeDef.ts" />
 
 import TenshiModules = require('lib/tenshi/modules/TenshiModules');
-//import StringUtils = require('lib/tenshi/recipes/factory/StringUtils');
+import StringUtils = require('lib/tenshi/utils/StringUtils');
 import ILogger = require('lib/tenshi/interface/ILogger');
 
 var injectParams = ['$scope', '$location', 'TenshiLogger'];
@@ -17,8 +14,6 @@ class HomeController {
 		this.$location = $location;
 
 		this.$scope.nameText = 'ik-ben-tommy dit is mijn angualr mvc';
-
-//		console.log(StringUtils.camelCase('home-controller'));
 
 		var logger = TenshiLogger.getInstance();
 		logger.log('This is a log');
@@ -33,7 +28,7 @@ class HomeController {
     }
 
 	handleClick2() {
-//		alert(StringUtils.camelCase(this.$scope.nameText));
+		alert(StringUtils.camelCase(this.$scope.nameText));
 	}
 }
 

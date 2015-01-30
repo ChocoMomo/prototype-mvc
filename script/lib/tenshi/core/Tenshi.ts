@@ -1,9 +1,3 @@
-/**
- * Created by tommy on 23-1-15.
- *
- * Tenshi Furēmuwāku
- */
-
 /// <reference path="../../typedef/typeDef.ts" />
 
 import ng = require('angular');
@@ -58,11 +52,9 @@ class Tenshi {
 			var route:any = TenshiRouteResolverProvider.route;
 
 			ng.forEach(this._sitemap.views, function(r) {
-//				$routeProvider.when('/' + r.id, route.resolve(r.id, r.id, 'vm'));
+				$routeProvider.when('/' + r.id, route.resolve(r.id, r.id, 'vm'));
 			});
 
-			$routeProvider.when('/home', route.resolve('Home', 'home', 'vm'));
-//			$routeProvider.when('/contact', route.resolve('Contact', 'contact', 'vm'));
 			$routeProvider.otherwise({redirectTo: '/home'});
 
 //			this.registerServices();

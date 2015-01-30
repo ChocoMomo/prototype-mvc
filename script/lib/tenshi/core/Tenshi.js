@@ -1,8 +1,4 @@
-/**
-* Created by tommy on 23-1-15.
-*
-* Tenshi Furēmuwāku
-*/
+/// <reference path="../../typedef/typeDef.ts" />
 define(["require", "exports", 'angular', 'lib/tenshi/modules/TenshiModules', 'lib/tenshi/recipes/provider/TenshiRouteResolver', 'lib/tenshi/recipes/provider/TenshiLogger'], function(require, exports, ng, TenshiModules, TenshiRouteResolver, TenshiLogger) {
     //import StringUtils          = require('lib/tenshi/recipes/factory/StringUtils');
     var Tenshi = (function () {
@@ -45,12 +41,9 @@ define(["require", "exports", 'angular', 'lib/tenshi/modules/TenshiModules', 'li
                     var route = TenshiRouteResolverProvider.route;
 
                     ng.forEach(_this._sitemap.views, function (r) {
-                        //				$routeProvider.when('/' + r.id, route.resolve(r.id, r.id, 'vm'));
+                        $routeProvider.when('/' + r.id, route.resolve(r.id, r.id, 'vm'));
                     });
 
-                    $routeProvider.when('/home', route.resolve('Home', 'home', 'vm'));
-
-                    //			$routeProvider.when('/contact', route.resolve('Contact', 'contact', 'vm'));
                     $routeProvider.otherwise({ redirectTo: '/home' });
                     //			this.registerServices();
                 }]);

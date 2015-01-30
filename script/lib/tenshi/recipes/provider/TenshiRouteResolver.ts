@@ -1,15 +1,24 @@
-﻿/**
- * Created by tommy on 14-1-15.
- */
-///<reference path="../../../typedef/typeDef.ts" />
+﻿///<reference path="../../../typedef/typeDef.ts" />
 
-//import StringUtils = require('lib/tenshi/recipes/factory/StringUtils');
+import StringUtils = require('lib/tenshi/utils/StringUtils');
 
 class TenshiRouteResolver implements ng.IServiceProvider {
+
+	/**
+	 * This is a mandatory Ng method for providers
+	 *
+	 * @access public static
+	 * @method: $get
+	 */
 	$get() {
 		return this;
 	}
 
+	/**
+	 * Route configurations
+	 *
+	 * @method: routeConfig
+	 */
 	routeConfig = function() {
 		var viewsDirectory = 'script/app/views/',
 			controllersDirectory = 'script/app/controllers/',
@@ -34,19 +43,26 @@ class TenshiRouteResolver implements ng.IServiceProvider {
 		};
 	}();
 
+	/**
+	 * Resolve the routing
+	 *
+	 * @method: route
+	 */
 	route = function(routeConfig) {
 		var resolve = (baseName, viewId, controllerAs, secure) => {
 
-				var routeDef:any = {};
-				var baseFileName = baseName.charAt(0).toLowerCase() + baseName.substr(1);
-				routeDef.templateUrl = routeConfig.getViewsDirectory() + viewId + '/' + baseFileName + '.html';
-				routeDef.controller = baseName + 'Controller';
+				var baseFileName = StringUtils.camelCase(baseName),
+					controller = baseFileName + 'Controller',
+					routeDef:any = {
+						templateUrl : routeConfig.getViewsDirectory() + viewId + '/' + baseName + '.html',
+						controller : controller,
+						controllerAs : ((controllerAs)? controllerAs : ''),
+						secure : ((secure) ? secure : false)
+					};
 
-				if (controllerAs) routeDef.controllerAs = controllerAs;
-				routeDef.secure = (secure) ? secure : false;
 				routeDef.resolve = {
 					load: ['$q', '$rootScope', function ($q, $rootScope) {
-						var dependencies = [routeConfig.getControllersDirectory() + viewId + '/' + baseName + 'Controller.js'];
+						var dependencies = [routeConfig.getControllersDirectory() + viewId + '/' + controller + '.js'];
 						return resolveDependencies($q, $rootScope, dependencies);
 					}]
 				};
@@ -54,7 +70,7 @@ class TenshiRouteResolver implements ng.IServiceProvider {
 				return routeDef;
 			},
 
-			resolveDependencies = ($q, $rootScope, dependencies) => {
+			resolveDependencies:any = ($q, $rootScope, dependencies) => {
 				var defer = $q.defer();
 				require(dependencies, function () {
 					defer.resolve();
