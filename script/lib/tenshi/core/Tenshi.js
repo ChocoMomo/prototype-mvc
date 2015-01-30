@@ -52,9 +52,7 @@ define(["require", "exports", 'angular', 'lib/tenshi/modules/TenshiModules', 'li
 
                     //			$routeProvider.when('/contact', route.resolve('Contact', 'contact', 'vm'));
                     $routeProvider.otherwise({ redirectTo: '/home' });
-
                     //			this.registerServices();
-                    console.log(TenshiLoggerProvider);
                 }]);
         };
 
@@ -66,7 +64,7 @@ define(["require", "exports", 'angular', 'lib/tenshi/modules/TenshiModules', 'li
         Tenshi.prototype.registerProviders = function () {
             ////Must be a provider since it will be injected into module.config()
             TenshiModules.providers.provider('TenshiRouteResolver', TenshiRouteResolver);
-            TenshiModules.providers.provider('TenshiLogger', TenshiLogger);
+            TenshiModules.providers.provider('TenshiLogger', TenshiLogger.TenshiLogger);
         };
 
         /**

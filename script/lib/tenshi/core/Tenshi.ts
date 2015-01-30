@@ -66,13 +66,6 @@ class Tenshi {
 			$routeProvider.otherwise({redirectTo: '/home'});
 
 //			this.registerServices();
-
-
-
-
-
-			console.log(TenshiLoggerProvider);
-
 		}]);
 	}
 
@@ -84,7 +77,7 @@ class Tenshi {
 	private registerProviders() {
 		////Must be a provider since it will be injected into module.config()
         TenshiModules.providers.provider('TenshiRouteResolver', TenshiRouteResolver);
-        TenshiModules.providers.provider('TenshiLogger', TenshiLogger);
+        TenshiModules.providers.provider('TenshiLogger', TenshiLogger.TenshiLogger);
 	}
 
 	/**
