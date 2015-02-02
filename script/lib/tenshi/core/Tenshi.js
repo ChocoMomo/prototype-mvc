@@ -1,6 +1,5 @@
 /// <reference path="../../typedef/typeDef.ts" />
 define(["require", "exports", 'angular', 'lib/tenshi/modules/TenshiModules', 'lib/tenshi/recipes/provider/TenshiRouteResolver', 'lib/tenshi/recipes/provider/TenshiLogger'], function(require, exports, ng, TenshiModules, TenshiRouteResolver, TenshiLogger) {
-    //import StringUtils          = require('lib/tenshi/recipes/factory/StringUtils');
     var Tenshi = (function () {
         function Tenshi(sitemap) {
             this._sitemap = sitemap;
@@ -39,7 +38,6 @@ define(["require", "exports", 'angular', 'lib/tenshi/modules/TenshiModules', 'li
                     };
 
                     var route = TenshiRouteResolverProvider.route;
-
                     ng.forEach(_this._sitemap.views, function (r) {
                         $routeProvider.when('/' + r.id, route.resolve(r.id, r.id, 'vm'));
                     });
