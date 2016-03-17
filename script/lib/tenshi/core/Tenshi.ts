@@ -6,7 +6,6 @@ import TenshiModules = require('lib/tenshi/modules/TenshiModules');
 //Services
 import TenshiRouteResolver  = require('lib/tenshi/recipes/provider/TenshiRouteResolver');
 import TenshiLogger         = require('lib/tenshi/recipes/provider/TenshiLogger');
-//import StringUtils          = require('lib/tenshi/recipes/factory/StringUtils');
 
 class Tenshi {
 	private _sitemap:any;

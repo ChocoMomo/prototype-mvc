@@ -16,7 +16,7 @@ define(["require", "exports", 'lib/tenshi/modules/TenshiModules', 'lib/tenshi/ut
             logger.debug('debug', 'This is a debug for line {0}', [8]);
         }
         HomeController.prototype.handleClick1 = function () {
-            alert(this.$location.path().substring(1));
+            alert("Route:: " + this.$location.path().substring(1));
             alert(this.$scope.nameText + ' button clicked awesome');
         };
 

@@ -23,7 +23,7 @@ class HomeController {
 	}
 
     handleClick1() {
-	    alert(this.$location.path().substring(1));
+	    alert("Route:: " + this.$location.path().substring(1));
         alert(this.$scope.nameText + ' button clicked awesome');
     }
 
