@@ -1,9 +1,8 @@
-define(["require", "exports", 'lib/tenshi/modules/TenshiModules'], function(require, exports, TenshiModules) {
+define(["require", "exports", 'lib/tenshi/modules/TenshiModules'], function (require, exports, TenshiModules) {
     var injectParams = ['$scope', '$location'];
     var ContactController = (function () {
         function ContactController($scope, $location) {
             $scope.nameText = 'test';
-
             this.$location = $location;
         }
         ContactController.prototype.handleClick = function () {
@@ -11,7 +10,6 @@ define(["require", "exports", 'lib/tenshi/modules/TenshiModules'], function(requ
         };
         return ContactController;
     })();
-
     ContactController.$inject = injectParams;
     TenshiModules.app.register.controller("ContactController", ContactController);
 });
