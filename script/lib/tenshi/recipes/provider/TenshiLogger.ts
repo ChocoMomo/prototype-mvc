@@ -1,6 +1,3 @@
-/**
- * Created by tommy on 29-1-15.
- */
 ///<reference path="../../../typedef/typeDef.ts" />
 
 export class TenshiLogger implements ng.IServiceProvider {

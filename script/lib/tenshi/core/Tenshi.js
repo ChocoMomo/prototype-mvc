@@ -38,7 +38,6 @@ define(["require", "exports", 'angular', 'lib/tenshi/modules/TenshiModules', 'li
                     };
 
                     var route = TenshiRouteResolverProvider.route;
-
                     ng.forEach(_this._sitemap.views, function (r) {
                         $routeProvider.when('/' + r.id, route.resolve(r.id, r.id, 'vm'));
                     });

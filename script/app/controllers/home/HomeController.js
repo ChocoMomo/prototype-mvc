@@ -6,7 +6,7 @@ define(["require", "exports", 'lib/tenshi/modules/TenshiModules', 'lib/tenshi/ut
             this.$scope = $scope;
             this.$location = $location;
 
-            this.$scope.nameText = 'ik-ben-tommy dit is mijn angualr mvc';
+            this.$scope.nameText = 'ik-ben-tommy dit is mijn angular mvc';
 
             var logger = TenshiLogger.getInstance();
             logger.log('This is a log');

@@ -1,6 +1,3 @@
-/**
-* Created by tommy on 29-1-15.
-*/
 ///<reference path="../../../typedef/typeDef.ts" />
 define(["require", "exports"], function(require, exports) {
     var TenshiLogger = (function () {

@@ -1,6 +1,3 @@
-/**
- * Created by tommy on 20-1-15.
- */
 /// <reference path="../../../lib/typedef/typeDef.ts" />
 import TenshiModules = require('lib/tenshi/modules/TenshiModules');
 

@@ -3,7 +3,7 @@
 import ng = require('angular');
 import TenshiModules = require('lib/tenshi/modules/TenshiModules');
 
-//Services
+//Providers
 import TenshiRouteResolver  = require('lib/tenshi/recipes/provider/TenshiRouteResolver');
 import TenshiLogger         = require('lib/tenshi/recipes/provider/TenshiLogger');
 
@@ -49,7 +49,6 @@ class Tenshi {
 			};
 
 			var route:any = TenshiRouteResolverProvider.route;
-
 			ng.forEach(this._sitemap.views, function(r) {
 				$routeProvider.when('/' + r.id, route.resolve(r.id, r.id, 'vm'));
 			});
